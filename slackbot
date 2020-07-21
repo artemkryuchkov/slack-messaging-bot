@@ -1,0 +1,47 @@
+
+// USEFUL LINKS
+// you can find and set up webhooks here https://api.slack.com/apps/
+// here's quick guide for markup formatting https://api.slack.com/reference/surfaces/formatting
+
+function postToSlack() {
+//working with Google ss
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('#NAME');
+  var row = sheet.getActiveCell().getRow();
+  var vals = sheet.getRange(row, 1, 1, 20).getValues();
+
+  if (vals[0][4] == '#CRUCIALSTATUS'){
+  //some params that needs to be taken into consideration
+    if(vals[0][5]==''){}
+    else{
+      if (vals[0][6]==''){}
+    else{
+      if (vals[0][13]==''){}
+    else{
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.alert('Notify logistics team about this order in Slack', ui.ButtonSet.OK_CANCEL);
+  if (response == ui.Button.CANCEL){}
+    else if (response == ui.Button.OK){
+      var text = 'Attention <!everyone> ! we have a new issue: \n'+ 
+        '*'+vals[0][1]+' '+vals[0][2]+' '+vals[0][3]+'* \n '+
+          vals[0][5]+' '+vals[0][6]+'\n'+
+          'and the reason is: \n'+
+           vals[0][13];}}}}}
+  // it's a way to greet everyone at the channel <!here>
+  
+  var webhookUrl = 'https://hooks.slack.com/services/TTTTTTTT/B01******9W/***********************';
+   
+  var payload = {
+    'channel' : 'TTTTTTTT/B01******9W/***********************'',
+    'username' : '*****_bot',
+    'text' : text
+  }
+ 
+  var options = {
+    'method' : 'post',
+    'contentType' : 'application/json',
+    'payload' : JSON.stringify(payload)
+  }
+ 
+  UrlFetchApp.fetch(webhookUrl, options)
+    }
